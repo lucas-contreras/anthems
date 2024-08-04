@@ -1,1 +1,1 @@
-export { globalPrefix } from './config'
+export { globalPrefix, serverUrl } from './config'

@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { AppLayout } from "./app-layout";
 import { globalPrefix } from "../config";
-import { AnthemPage, Anthems, ErrorPage, NotFoundPage } from "@/pages";
+import { Anthems, ErrorPage, NotFoundPage } from "@/pages";
+import { AnthemPage } from ".";
 
 export const routes = createBrowserRouter(
   [

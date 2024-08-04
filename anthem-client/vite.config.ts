@@ -14,7 +14,13 @@ export default defineConfig(({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-
-
+    server: {
+      proxy: {
+        [env.VITE_SERVER_URL]: {
+          target: 'http://localhost:8080/',
+          secure: false,
+        }
+      }
+    }
   }
 })
