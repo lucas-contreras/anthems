@@ -1,0 +1,1 @@
+export { globalPrefix } from './config'

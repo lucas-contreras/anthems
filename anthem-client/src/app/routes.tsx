@@ -1,18 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import { globalPrefix } from "./config/config";
-import {
-  NotFoundPage,
-  RootPage,
-  ErrorPage,
-  Anthems,
-  AnthemPage,
-} from "./pages";
+
+import { AppLayout } from "./app-layout";
+import { globalPrefix } from "../config";
+import { AnthemPage, Anthems, ErrorPage, NotFoundPage } from "@/pages";
 
 export const routes = createBrowserRouter(
   [
     {
       path: "/",
-      element: <RootPage />,
+      element: <AppLayout />,
       ErrorBoundary: ErrorPage,
       children: [
         {

@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { AppRouteProvider } from "./AppRouteProvider.tsx";
+import { App } from "./app/index.tsx";
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AppRouteProvider />
+    <App />
   </React.StrictMode>
 );
