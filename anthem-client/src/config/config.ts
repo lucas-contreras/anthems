@@ -1,0 +1,1 @@
+export const globalPrefix = import.meta.env.VITE_GLOBAL_PREFIX;
