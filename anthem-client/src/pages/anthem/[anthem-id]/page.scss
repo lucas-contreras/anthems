@@ -1,0 +1,16 @@
+.anthem-container-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 600px;
+}
+
+.piano {
+  background-image: url("/app/1-21.jpg");
+  // background-image: url("/app/22-34.jpg");
+}

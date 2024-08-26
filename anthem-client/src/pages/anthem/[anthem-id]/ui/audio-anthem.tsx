@@ -1,27 +1,31 @@
-import s from "./audio-anthem.module.scss";
+import { forwardRef } from "react";
+import { calculateByPrecision } from "../utils";
 
 interface AudioAnthemProps {
   title: string;
   source: string;
   updateCurrentTime: (val: number) => void;
+  onEnded: (e: React.SyntheticEvent<HTMLAudioElement, Event>) => void;
 }
 
-export function AudioAnthem({
-  title,
-  source,
-  updateCurrentTime,
-}: AudioAnthemProps) {
-  return (
-    <audio
-      className={s.audio}
-      controls
-      onTimeUpdate={({ currentTarget }) => {
-        const rounded = Math.round(currentTarget.currentTime * 100) / 100;
-        updateCurrentTime(rounded);
-      }}
-    >
-      <source src={source} type="audio/mp3" />
-      {title}
-    </audio>
-  );
-}
+const AudioAnthem = forwardRef<HTMLAudioElement, AudioAnthemProps>(
+  ({ source, title, onEnded, updateCurrentTime }, ref) => {
+    return (
+      <audio
+        ref={ref}
+        // controls
+        onTimeUpdate={({ currentTarget }) => {
+          const result = calculateByPrecision(currentTarget.currentTime);
+          updateCurrentTime(result);
+        }}
+        onEnded={onEnded}
+        // style={{ display: "none" }}
+      >
+        <source src={source} type="audio/mp3" />
+        {title}
+      </audio>
+    );
+  }
+);
+
+export { AudioAnthem };

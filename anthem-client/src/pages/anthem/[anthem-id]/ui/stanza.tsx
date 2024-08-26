@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Lyric } from "@/entities/anthem/api";
-import s from "./stanza.module.scss";
+import "./stanza.scss";
 
 interface StanzaProps {
   lyrics: Lyric[];
@@ -8,27 +8,40 @@ interface StanzaProps {
 }
 
 export function Stanza({ lyrics, currentLyric }: StanzaProps) {
+  const stanzaContainerRef = useRef<HTMLDivElement | null>(null);
+
   const result = useMemo(
     () =>
-      lyrics.map((l) => {
-        const paragraphs = l.text.map((t: string, index: number) => (
-          <p key={index}>{t}</p>
+      lyrics.map((lyric, idx, self) => {
+        const paragraphs = lyric.text.map((t: string, idx: number) => (
+          <p className="stanza-paragraph" key={idx}>
+            {t}
+          </p>
         ));
 
-        const classNameStanza = [s.stanza];
+        const classNameStanza = ["stanza"];
 
-        if (currentLyric?.id === l.id) {
-          classNameStanza.push(s["stanza--show"]);
+        if (idx === 0 || self.length - 1 === idx) {
+          classNameStanza.push("stanza-title");
+        }
+
+        if (currentLyric?.id === lyric.id) {
+          classNameStanza.push("stanza--show");
         }
 
         return (
-          <div key={l.caption} className={classNameStanza.join(" ")}>
+          <section key={lyric.id} className={classNameStanza.join(" ")}>
             {paragraphs}
-          </div>
+            <span className="stanza-caption">{lyric.caption}</span>
+          </section>
         );
       }),
     [currentLyric, lyrics]
   );
 
-  return <div className={s.stanzaContainer}>{result}</div>;
+  return (
+    <div ref={stanzaContainerRef} className="stanzaContainer">
+      {result}
+    </div>
+  );
 }
