@@ -4,6 +4,7 @@ import { AppLayout } from "./app-layout";
 import { globalPrefix } from "../config";
 import { Anthems, ErrorPage, NotFoundPage } from "@/pages";
 import { AnthemPage } from ".";
+import { SeekBar } from "./ui/seek-bar";
 
 export const routes = createBrowserRouter(
   [
@@ -12,6 +13,11 @@ export const routes = createBrowserRouter(
       element: <AppLayout />,
       ErrorBoundary: ErrorPage,
       children: [
+        {
+          path: '/',
+          element: <div><SeekBar /></div>,
+          index: true,
+        },
         {
           path: "anthem",
           element: <Anthems />,
