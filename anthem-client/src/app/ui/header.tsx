@@ -1,3 +1,5 @@
+import './header.scss';
+
 export function Header() {
-    return <header><h1>aaaaaaaaaa</h1></header>
+    return <header><h1 className="title">himnario adventista</h1></header>
 }

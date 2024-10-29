@@ -1,0 +1,19 @@
+.seek-container {
+    background-color: antiquewhite;
+    padding: 1rem;
+}
+
+.seek-options {
+    margin-bottom: 1rem;
+}
+
+.seek-form {
+    & input {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.anthem-number {
+    max-width: 2rem;
+}

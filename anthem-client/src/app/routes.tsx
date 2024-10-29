@@ -1,10 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import { AppLayout } from "./app-layout";
 import { globalPrefix } from "../config";
-import { Anthems, ErrorPage, NotFoundPage } from "@/pages";
+import { Anthems, ErrorPage, LandingPage, NotFoundPage } from "@/pages";
 import { AnthemPage } from ".";
-import { SeekBar } from "./ui/seek-bar";
 
 export const routes = createBrowserRouter(
   [
@@ -15,7 +13,7 @@ export const routes = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <div><SeekBar /></div>,
+          element: <LandingPage />,
           index: true,
         },
         {
