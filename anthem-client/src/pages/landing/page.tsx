@@ -1,10 +1,12 @@
 import { SeekBar } from "@/widgets/seek-bar/seek-bar";
-import './page.scss';
+import { Header } from "@/app/ui/header";
+import "./page.scss";
 
 export function LandingPage() {
-    return (
-        <div className="landing-page">
-            <SeekBar />
-        </div>
-    );
+  return (
+    <div className="landing-page">
+      <Header />
+      <SeekBar />
+    </div>
+  );
 }

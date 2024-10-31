@@ -4,6 +4,7 @@ import { Anthem } from "@/entities/anthem/api";
 import { AudioAnthem, Stanza } from "./ui";
 import { useAudioControls } from "./hooks/use-audio-controls";
 import { getImageNameMapped } from "./utils";
+import { useNavigate } from "react-router-dom";
 import "./page.scss";
 
 interface AnthemPageProps {
@@ -13,6 +14,7 @@ interface AnthemPageProps {
 export function AnthemPage({ anthem }: AnthemPageProps) {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [audioRef, setAudioRef] = useState<HTMLAudioElement | null>(null);
+  const navigate = useNavigate();
 
   useAudioControls(audioRef);
 
@@ -25,8 +27,10 @@ export function AnthemPage({ anthem }: AnthemPageProps) {
   });
 
   const onEnded = useCallback(() => {
-    console.log("ended");
-  }, []);
+    navigate({
+      pathname: "/",
+    });
+  }, [navigate]);
 
   const css = `anthem-container-page ${getImageNameMapped(
     anthem.backgroundImage

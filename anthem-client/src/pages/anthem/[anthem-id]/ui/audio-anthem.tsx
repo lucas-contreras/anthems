@@ -13,13 +13,14 @@ const AudioAnthem = forwardRef<HTMLAudioElement, AudioAnthemProps>(
     return (
       <audio
         ref={ref}
-        // controls
+        autoPlay={true}
+        controls
         onTimeUpdate={({ currentTarget }) => {
           const result = calculateByPrecision(currentTarget.currentTime);
           updateCurrentTime(result);
         }}
         onEnded={onEnded}
-        // style={{ display: "none" }}
+        style={{ position: "absolute", zIndex: 10 }}
       >
         <source src={source} type="audio/mp3" />
         {title}
