@@ -21,6 +21,7 @@ router.get("/anthem/:id", (request: Request, response: Response) => {
         "id": "1",
         "name": "Cantad alegres al Señor",
         "backgroundImage": "1-21.jpg",
+        // "backgroundImage": "35-45.jpg",
         "source": "http://localhost:8080/001_Cantad_alegres_al_Senior.mp3",
         "description": "Salmo 100:1-5",
         "lyrics": [

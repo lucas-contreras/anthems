@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:client": "turbo run client#dev",
+    "dev:api": "turbo run api#start:dev",
+    "dev:all": "turbo run api#start:dev client#dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "workspaces": [
+    "apps/api",
+    "apps/client"
+  ],
+  "packageManager": "npm@10.8.3",
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  }
 }
