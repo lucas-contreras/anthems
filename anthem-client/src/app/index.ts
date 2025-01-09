@@ -1,1 +1,0 @@
-export { AnthemPage } from './anthem/[anthem-id]/page';

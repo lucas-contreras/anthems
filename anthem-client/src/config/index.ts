@@ -1,1 +1,0 @@
-export { globalPrefix, serverUrl } from './config'
