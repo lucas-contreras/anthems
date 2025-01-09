@@ -7,7 +7,6 @@ npm-debug.log*
 dist
 node_modules
 build
-dist-ssr
 *.local
 
 # Editor directories and files
@@ -15,6 +14,7 @@ dist-ssr
 !.vscode/extensions.json
 *.launch
 .settings/
+.turbo
 *.sublime-workspace
 
 # Tests
@@ -26,5 +26,3 @@ dist-ssr
 .env.test.local
 .env.production.local
 .env.local
-
-.turbo

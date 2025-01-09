@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
       proxy: {
         [env.VITE_SERVER_URL]: {
           target: 'http://localhost:8080/',
-          rewrite: (path) => path.replace(/^\/service/, ''),
         }
       }
     }
