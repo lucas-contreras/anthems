@@ -1,0 +1,14 @@
+POST http://localhost:8080/service/api/anthem HTTP/1.1
+content-type: application/json
+
+{
+  "id": 1,
+  "name": "Cantad alegres al Señor",
+  "backgroundImage": "1-21.jpg",
+  "source": "http://localhost:8080/001_Cantad_alegres_al_Senior.mp3",
+  "description": "Salmo 100:1-5"
+}
+###
+GET http://localhost:8080/service/api/anthem/1 HTTP/1.1
+###
+DELETE http://localhost:8080/service/api/anthem/1 HTTP/1.1

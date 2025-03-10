@@ -1,17 +1,56 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { AnthemService } from './anthem.service';
+import { CreateAnthemDto } from './dto/create-anthem.dto';
+import { UpdateAnthemDto } from './dto/update-anthem.dto';
 
-@Controller({ path: 'anthem' })
+@Controller('anthems')
 export class AnthemController {
-  constructor(private readonly appService: AnthemService) {}
+  constructor(private readonly anthemService: AnthemService) {}
+
+  @Post()
+  async create(@Body() createAnthemDto: CreateAnthemDto) {
+    const exist = await this.anthemService.checkIfExistById(createAnthemDto.id);
+
+    if (exist) {
+      throw new BadRequestException(
+        `The id ${createAnthemDto.id} exists in the database`,
+      );
+    }
+    return this.anthemService.create(createAnthemDto);
+  }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  findAll() {
+    return this.anthemService.findAll();
   }
+
   @Get(':id')
-  getHello2(@Param() id: string) {
-    console.log(id);
-    return this.appService.getSomething();
+  async findOne(@Param('id') id: string) {
+    const result = await this.anthemService.findOne(+id);
+
+    if (!result) {
+      throw new NotFoundException(`There's not any anthem with that ID ${id}`);
+    }
+    return result;
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateAnthemDto: UpdateAnthemDto) {
+    return this.anthemService.update(+id, updateAnthemDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.anthemService.remove(+id);
   }
 }
