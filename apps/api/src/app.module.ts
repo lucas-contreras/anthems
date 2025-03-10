@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AnthemController } from './anthem/anthem.controller';
-import { AnthemService } from './anthem/anthem.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AnthemModule } from './anthem/anthem.module';
+import { LyricsModule } from './lyrics/lyrics.module';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
+    AnthemModule,
+    LyricsModule,
   ],
-  controllers: [AnthemController],
-  providers: [AnthemService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
