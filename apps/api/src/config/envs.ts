@@ -4,12 +4,14 @@ import * as joi from 'joi';
 interface EnvVars {
   PORT: number;
   DATABASE_URL: string;
+  SOURCE_DESTINATION: string;
 }
 
 const envsSchema = joi
   .object({
     PORT: joi.number().required(),
     DATABASE_URL: joi.string().required(),
+    SOURCE_DESTINATION: joi.string().required(),
   })
   .unknown(true);
 

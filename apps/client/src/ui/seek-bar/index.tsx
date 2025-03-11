@@ -94,7 +94,7 @@ export function SeekBar() {
         </label>
         <button type="submit">Reproducir</button>
       </form>
-      <div>
+      <div style={{ display: "none" }}>
         <i>results go here when we find the lyrics title</i>
         <ul>
           <li>1</li>
