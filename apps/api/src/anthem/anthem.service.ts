@@ -72,6 +72,7 @@ export class AnthemService {
           },
         },
       },
+      omit: { createdAt: true, updatedAt: true },
       where: { id },
     });
   }
