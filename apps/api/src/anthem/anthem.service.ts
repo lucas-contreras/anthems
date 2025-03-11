@@ -61,7 +61,7 @@ export class AnthemService {
   }
 
   async findOne(id: number) {
-    return this.getCurrent().findFirst({
+    const anthems = await this.getCurrent().findFirst({
       include: {
         lyrics: {
           omit: { anthemId: true },
@@ -75,6 +75,10 @@ export class AnthemService {
       omit: { createdAt: true, updatedAt: true },
       where: { id },
     });
+
+    anthems.source = `${process.env.SOURCE_DESTINATION}/${anthems.source}`;
+
+    return anthems;
   }
 
   update(id: number, updateAnthemDto: UpdateAnthemDto) {
