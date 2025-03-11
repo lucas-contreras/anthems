@@ -1,6 +1,6 @@
 import { Lyric } from "./lyric";
 
-export interface Anthem {
+export type Anthem = {
     id: string;
     name: string;
     backgroundImage: string;

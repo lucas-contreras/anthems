@@ -25,7 +25,7 @@ export function useAnthem(id: string) {
     useEffect(() => {
         update({ ...DEFAULT_STATE, loading: true });
 
-        fetchJSON<Anthem>(`${serverUrl}/anthem/${id}`).then((response) => {
+        fetchJSON<Anthem>(`${serverUrl}/anthems/${id}`).then((response) => {
             update({ data: response, error: null });
         }).catch((reason) => {
             update({ error: reason });

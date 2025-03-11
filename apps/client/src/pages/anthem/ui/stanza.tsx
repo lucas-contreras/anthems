@@ -13,9 +13,9 @@ export function Stanza({ lyrics, currentLyric }: StanzaProps) {
   const result = useMemo(
     () =>
       lyrics.map((lyric, idx, self) => {
-        const paragraphs = lyric.text.map((t: string, idx: number) => (
-          <p className="stanza-paragraph" key={idx}>
-            {t}
+        const paragraphs = lyric.texts.map(({ id, text }) => (
+          <p className="stanza-paragraph" key={id}>
+            {text}
           </p>
         ));
 
