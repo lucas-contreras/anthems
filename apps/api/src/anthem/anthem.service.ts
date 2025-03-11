@@ -8,11 +8,51 @@ export class AnthemService {
   constructor(private readonly prisma: PrismaService) {}
 
   async checkIfExistById(id: number) {
-    return await this.prisma.checkIfExistById(id, this.getCurrent());
+    const exist = await this.getCurrent().findFirst({
+      where: { id },
+    });
+
+    return !!exist;
   }
 
   async create(payload: CreateAnthemDto) {
-    await this.getCurrent().create({ data: payload });
+    const { lyrics } = payload;
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.anthems.create({
+        data: {
+          id: payload.id,
+          name: payload.name,
+          description: payload.description,
+          backgroundImage: payload.backgroundImage,
+          source: payload.source,
+          group: payload.group,
+        },
+      });
+
+      await tx.lyrics.createMany({
+        data: lyrics.map((lyric) => ({
+          id: lyric.id,
+          caption: lyric.caption,
+          startTime: lyric.startTime,
+          endTime: lyric.endTime,
+          anthemId: payload.id,
+        })),
+      });
+
+      const lyricText: { text: string; lyricId: number }[] = [];
+
+      lyrics.forEach((lyric) => {
+        lyric.text.forEach((text) => {
+          lyricText.push({ lyricId: lyric.id, text });
+        });
+      });
+
+      await tx.lyricTexts.createMany({
+        data: lyricText,
+      });
+    });
+
     return { status: HttpStatus.CREATED, data: 'ok' };
   }
 
@@ -20,8 +60,20 @@ export class AnthemService {
     return this.getCurrent().findMany();
   }
 
-  findOne(id: number) {
-    return this.getCurrent().findFirst({ where: { id } });
+  async findOne(id: number) {
+    return this.getCurrent().findFirst({
+      include: {
+        lyrics: {
+          omit: { anthemId: true },
+          include: {
+            texts: {
+              select: { id: true, text: true },
+            },
+          },
+        },
+      },
+      where: { id },
+    });
   }
 
   update(id: number, updateAnthemDto: UpdateAnthemDto) {
